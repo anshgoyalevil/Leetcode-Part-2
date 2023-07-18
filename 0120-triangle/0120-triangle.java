@@ -26,7 +26,23 @@ class Solution {
             }
         }
         
-        return f(t, 0, 0, dp);
+        for(int i = 0; i<t.size(); i++){
+            dp[dp.length-1][i] = t.get(dp.length-1).get(i);
+        }
+        
+        for(int i = t.size() - 2; i>-1; i--){
+            
+            for(int j = 0; j<t.get(i).size(); j++){
+                int a = dp[i+1][j] + t.get(i).get(j);
+                int b = dp[i+1][j+1] + t.get(i).get(j);
+                dp[i][j] = Math.min(a, b);
+            }
+            
+        }
+        
+        return dp[0][0];
+        
+        //return f(t, 0, 0, dp);
         
     }
 }
